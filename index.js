@@ -5,6 +5,7 @@ const feedbackRoute = require("./routes/feedback.route.js");
 const app = express();
 const path = require('path');
 
+
 app.use(express.static(__dirname));
 //middleware
 
@@ -16,7 +17,7 @@ app.listen(3000, () => {
 });
 
 //routes
-app.use("/api/feedbacks", feedbackRoute);
+app.use("/api/feedback", feedbackRoute);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'User Feedback Form.html'));
