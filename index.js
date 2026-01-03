@@ -17,7 +17,7 @@ app.listen(3000, () => {
 });
 
 //routes
-app.use("/api/feedback", feedbackRoute);
+app.use("/feedback", feedbackRoute);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'User Feedback Form.html'));

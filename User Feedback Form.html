@@ -16,7 +16,7 @@
             class="form-image"
         /> -->
 
-        <form action="/api/feedback" method="POST">
+        <form action="/feedback" method="POST">
             <!-- Title and Description -->
             <div class="form-header">
                 <h2 class="form-title">Customer Feedback Survey</h2>
@@ -265,16 +265,8 @@
 
             <!-- Submit Button -->
             <button type="submit" class="submit-btn">Submit Feedback</button>
-            <button onclick="exportToExcel()" class="export-btn submit-btn">See all Feedbacks</button>
+            <button action="/exportData" class="export-btn submit-btn">See all Feedbacks</button>
         </form>
-        <!-- Add this button in your admin panel or wherever you want -->
-
-
-<script>
-function exportToExcel() {
-    window.location.href = '/api/feedback/export-excel';
-}
-</script>
 
 <style>
 .export-btn {
