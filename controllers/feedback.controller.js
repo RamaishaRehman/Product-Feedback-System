@@ -46,10 +46,10 @@ const exportData = async (req, res) => {
     let feedbacks = [];
     var userData = await Feedback.find({});
     userData.forEach((feedback) => {
-      const { id, fullname, email, feedback: fb, improvement, comments, createdAt } = feedback;
-      feedbacks.push({ id, fullname, email, feedback: fb, improvement, comments, createdAt });
+      const { id, fullname, email, feedback: fb, improvement, comments } = feedback;
+      feedbacks.push({ id, fullname, email, feedback: fb, improvement, comments });
   });
-  const csvFields=['ID', 'Full Name', 'Email', 'Feedback', 'Improvement', 'Comments', 'Created At'];
+  const csvFields=['ID', 'Full Name', 'Email', 'Feedback', 'Improvement', 'Comments'];
   const csvParser = new CsvParser({ csvFields });
   const csvData = csvParser.parse(feedbacks);
 
@@ -62,68 +62,6 @@ const exportData = async (req, res) => {
     res.status(500).json({ message: err.message });
 }
 };
-
-// // Export to Excel
-// const exportToExcel = async (req, res) => {
-//   try {
-//     // Fetch all feedback data
-//     const feedbacks = await Feedback.find({});
-    
-//     // Format data for Excel
-//     const excelData = feedbacks.map((feedback) => ({
-//       'ID': feedback._id.toString(),
-//       'Full Name': feedback.fullname || 'N/A',
-//       'Email': feedback.email || 'N/A',
-//       'Overall Satisfaction': feedback['overall-satisfaction'] || 'N/A',
-//       'Service Quality': feedback['service-quality'] || 'N/A',
-//       'Recommendation': feedback.recommendation || 'N/A',
-//       'Feedback': feedback.feedback || 'N/A',
-//       'Improvement': feedback.improvement || 'N/A',
-//       'Comments': feedback.comments || 'N/A',
-//       'Likert Scale': feedback['likert-scale'] || 'N/A',
-//       'Created At': feedback.createdAt ? new Date(feedback.createdAt).toLocaleString() : 'N/A'
-//     }));
-
-//     // Create workbook and worksheet
-//     const workbook = XLSX.utils.book_new();
-//     const worksheet = XLSX.utils.json_to_sheet(excelData);
-
-//     // Set column widths
-//     worksheet['!cols'] = [
-//       { wch: 25 }, // ID
-//       { wch: 20 }, // Full Name
-//       { wch: 30 }, // Email
-//       { wch: 20 }, // Overall Satisfaction
-//       { wch: 20 }, // Service Quality
-//       { wch: 15 }, // Recommendation
-//       { wch: 40 }, // Feedback
-//       { wch: 40 }, // Improvement
-//       { wch: 40 }, // Comments
-//       { wch: 20 }, // Likert Scale
-//       { wch: 20 }  // Created At
-//     ];
-
-//     XLSX.utils.book_append_sheet(workbook, worksheet, 'Feedbacks');
-
-//     // Generate filename with timestamp
-//     const timestamp = new Date().toISOString().replace(/:/g, '-').split('.')[0];
-//     const filename = `feedbacks_${timestamp}.xlsx`;
-
-//     // Write file to buffer
-//     const excelBuffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
-
-//     // Set headers for download
-//     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-//     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-    
-//     // Send file
-//     res.send(excelBuffer);
-
-//   } catch (err) {
-//     console.error('Export error:', err);
-//     res.status(500).json({ message: err.message });
-//   }
-// };
 
 //update Feedback
 const updateFeedback = async (req, res) => {

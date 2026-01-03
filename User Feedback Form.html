@@ -265,7 +265,7 @@
 
             <!-- Submit Button -->
             <button type="submit" class="submit-btn">Submit Feedback</button>
-            <button action="/exportData" class="export-btn submit-btn">See all Feedbacks</button>
+            <button type="button" class="export-btn submit-btn" onclick="window.location.href='/feedback/exportData'">See all Feedbacks</button>
         </form>
 
 <style>
@@ -277,6 +277,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-weight: 500;
+    margin-top: 10px;
 }
 .export-btn:hover {
     background-color: #059669;
